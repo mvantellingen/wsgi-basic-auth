@@ -11,7 +11,7 @@ tests_require = [
 
 setup(
     name='wsgi-basic-auth',
-    version='0.0.2',
+    version='0.0.3',
     description=description,
     url='https://github.com/mvantellingen/wsgi-basic-auth',
     author="Michael van Tellingen",
@@ -21,11 +21,8 @@ setup(
     ],
     tests_require=tests_require,
     extras_require={'test': tests_require},
-    entry_points={
-    },
     package_dir={'': 'src'},
-    packages=find_packages('src'),
-    include_package_data=True,
+    py_modules=['wsgi_basic_auth'],
     license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
