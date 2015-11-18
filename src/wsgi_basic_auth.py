@@ -14,9 +14,10 @@ class BasicAuth(object):
         self._exclude_paths = exclude_paths or _exclude_paths_from_environ()
 
     def __call__(self, environ, start_response):
-        request = Request(environ)
-        if not self.is_authorized(request):
-            return self._login(environ, start_response)
+        if self._users:
+            request = Request(environ)
+            if not self.is_authorized(request):
+                return self._login(environ, start_response)
         return self._app(environ, start_response)
 
     def is_authorized(self, request):
