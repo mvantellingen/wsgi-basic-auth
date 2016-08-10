@@ -1,10 +1,5 @@
-.. WSGI Basic Auth documentation master file, created by
-   sphinx-quickstart on Wed Aug 10 17:06:14 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to WSGI Basic Auth's documentation!
-===========================================
+WSGI Basic Auth
+===============
 
 Really simple wsgi middleware to provide basic http auth. It is intented to
 work with environment variables. This makes it simple to use in a docker 
@@ -23,7 +18,7 @@ to authenticate with username foo and password bar. Multiple credentials are
 separated with a | (pipe) character.
 
 To exclude specific paths for healthchecks (e.g. the Amazon ELB healthchecks)
-specifcy the environment variable WSGI_AUTH_EXCLUDE_PATHS=/api/healthchecks.
+specify the environment variable WSGI_AUTH_EXCLUDE_PATHS=/api/healthchecks.
 Here multiple paths can be separated with the ; char.
 
 
