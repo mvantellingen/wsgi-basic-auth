@@ -6,6 +6,21 @@ from webob.exc import HTTPUnauthorized
 
 
 class BasicAuth(object):
+    """WSGI Middleware to add Basic Authentication to an existing wsgi app.
+
+    :param app: the wsgi application
+    :param realm: the basic auth realm. Default = 'protected'
+    :param users: dictionary with username -> password mapping. When not
+                  supplied the values from the environment variable
+                  ``WSGI_AUTH_CREDENTIALS``. If no users are defined then
+                  the middleware is disabled.
+
+    :param exclude_paths: list of path prefixes to exclude from auth. When not
+                          supplied the values from the ``WSGI_AUTH_EXCLUDE_PATHS``
+                          environment variable are used (splitted by ``:``)
+    :param env_prefix: prefix for the environment variables above, default ``''``
+
+    """
 
     def __init__(self, app, realm='Protected', users=None, exclude_paths=None,
                  env_prefix=''):
