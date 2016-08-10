@@ -10,6 +10,7 @@ docs_require = [
 tests_require = [
     'pytest-cov>=2.2.0',
     'pytest>=2.8.3',
+    'WebTest==2.0.23',
 
     # Linting
     'isort==4.2.5',
