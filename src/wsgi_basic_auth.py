@@ -7,11 +7,14 @@ from webob.exc import HTTPUnauthorized
 
 class BasicAuth(object):
 
-    def __init__(self, app, realm='Protected', users=None, exclude_paths=None):
+    def __init__(self, app, realm='Protected', users=None, exclude_paths=None,
+                 env_prefix=''):
         self._app = app
+        self._env_prefix = env_prefix
         self._realm = realm
-        self._users = users or _users_from_environ()
-        self._exclude_paths = exclude_paths or _exclude_paths_from_environ()
+        self._users = users or _users_from_environ(env_prefix)
+        self._exclude_paths = (
+            exclude_paths or _exclude_paths_from_environ(env_prefix))
 
     def __call__(self, environ, start_response):
         if self._users:
@@ -39,9 +42,9 @@ class BasicAuth(object):
         return response(environ, start_response)
 
 
-def _users_from_environ():
+def _users_from_environ(env_prefix):
     """Environment value via `user:password|user2:password2`"""
-    auth_string = os.environ.get('WSGI_AUTH_CREDENTIALS')
+    auth_string = os.environ.get(env_prefix + 'WSGI_AUTH_CREDENTIALS')
     if not auth_string:
         return {}
 
@@ -52,9 +55,9 @@ def _users_from_environ():
     return result
 
 
-def _exclude_paths_from_environ():
+def _exclude_paths_from_environ(env_prefix):
     """Environment value via `user:password|user2:password2`"""
-    paths = os.environ.get('WSGI_AUTH_EXCLUDE_PATHS')
+    paths = os.environ.get(env_prefix + 'WSGI_AUTH_EXCLUDE_PATHS')
     if not paths:
         return []
     return paths.split(';')
