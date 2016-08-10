@@ -1,8 +1,5 @@
 from setuptools import setup
 
-with open('README.rst', 'r') as fh:
-    description = '\n'.join(fh.readlines())
-
 docs_require = [
     'sphinx>=1.4.0',
 ]
@@ -22,8 +19,9 @@ tests_require = [
 
 setup(
     name='wsgi-basic-auth',
-    version='1.0.1',
-    description=description,
+    version='1.0.4',
+    description="Simple wsgi middleware to provide basic http auth",
+    long_description=open('README.rst', 'r').read(),
     url='https://github.com/mvantellingen/wsgi-basic-auth',
     author="Michael van Tellingen",
     author_email="michaelvantellingen@gmail.com",
