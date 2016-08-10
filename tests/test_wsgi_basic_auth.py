@@ -1,10 +1,10 @@
-import pytest
+from webtest import TestApp
+
 import wsgi_basic_auth
-from webtest import TestApp, AppError
 
 
 def wsgi_app(environ, start_response):
-    body = 'this is private! go away!'
+    body = b'this is private! go away!'
     headers = [
         ('Content-Type', 'text/html; charset=utf8'),
         ('Content-Length', str(len(body)))
