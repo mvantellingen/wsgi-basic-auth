@@ -57,7 +57,7 @@ class BasicAuth(object):
         return response(environ, start_response)
 
 
-def _users_from_environ(env_prefix):
+def _users_from_environ(env_prefix=''):
     """Environment value via `user:password|user2:password2`"""
     auth_string = os.environ.get(env_prefix + 'WSGI_AUTH_CREDENTIALS')
     if not auth_string:
@@ -70,7 +70,7 @@ def _users_from_environ(env_prefix):
     return result
 
 
-def _exclude_paths_from_environ(env_prefix):
+def _exclude_paths_from_environ(env_prefix=''):
     """Environment value via `user:password|user2:password2`"""
     paths = os.environ.get(env_prefix + 'WSGI_AUTH_EXCLUDE_PATHS')
     if not paths:

@@ -3,6 +3,16 @@
 install:
 	pip install -e .[docs,test]
 
+test:
+	py.test -vvv
+
+retest:
+	py.test -vvv --lf
+
+coverage:
+	py.test --cov=wsgi_basic_auth --cov-report=term-missing --cov-report=html
+
+
 lint:
 	flake8 src/ tests/
 	isort --recursive --check-only --diff src tests

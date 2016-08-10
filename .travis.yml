@@ -1,0 +1,21 @@
+sudo: false
+language: python
+cache: pip
+
+python:
+    - '2.7'
+    - '3.3'
+    - '3.4'
+    - '3.5'
+
+before_install:
+    - pip install codecov
+
+install:
+    - pip install -e .[test]
+
+script:
+    - py.test --cov=wsgi_basic_auth --cov-report=term-missing
+
+after_success:
+    - codecov
