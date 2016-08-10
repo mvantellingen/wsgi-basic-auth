@@ -22,7 +22,7 @@ tests_require = [
 
 setup(
     name='wsgi-basic-auth',
-    version='1.0.0',
+    version='1.0.1',
     description=description,
     url='https://github.com/mvantellingen/wsgi-basic-auth',
     author="Michael van Tellingen",
