@@ -130,6 +130,9 @@ html_theme_options = {
     'github_user': 'mvantellingen',
     'github_banner': True,
     'github_repo': 'wsgi-basic-auth',
+    'travis_button': True,
+    'codecov_button': True,
+    'analytics_id': 'UA-75907833-2',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
