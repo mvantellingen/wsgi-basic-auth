@@ -50,7 +50,6 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'WSGI Basic Auth'
-project = u'Zeep'
 copyright = u'2016, <a href="https://www.mvantellingen.nl/">Michael van Tellingen</a>'
 author = u'Michael van Tellingen'
 
