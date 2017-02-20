@@ -49,7 +49,7 @@ To include only specific paths specify the environment variable
 WSGI_AUTH_EXCLUDE_PATHS. Here multiple paths can be separated with the ; char.
 
 You can use both include and exclude paths together for example:
-WSGI_AUTH_INCLUDE_PATHS=/foo
+WSGI_AUTH_PATHS=/foo
 WSGI_AUTH_EXCLUDE_PATHS=/foo/bar
 This will force Basic Auth on all paths under /foo except /foo/bar
 

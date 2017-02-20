@@ -41,7 +41,7 @@ def test_auth_exclude(monkeypatch):
 
 def test_auth_include(monkeypatch):
     monkeypatch.setenv('WSGI_AUTH_CREDENTIALS', 'foo:bar')
-    monkeypatch.setenv('WSGI_AUTH_INCLUDE_PATHS', '/healthcheck')
+    monkeypatch.setenv('WSGI_AUTH_PATHS', '/healthcheck')
     application = wsgi_basic_auth.BasicAuth(wsgi_app)
     app = TestApp(application)
     app.get('/', status=200)
@@ -49,7 +49,7 @@ def test_auth_include(monkeypatch):
 
 def test_auth_include_and_exclude(monkeypatch):
     monkeypatch.setenv('WSGI_AUTH_CREDENTIALS', 'foo:bar')
-    monkeypatch.setenv('WSGI_AUTH_INCLUDE_PATHS', '/healthcheck')
+    monkeypatch.setenv('WSGI_AUTH_PATHS', '/healthcheck')
     monkeypatch.setenv('WSGI_AUTH_EXCLUDE_PATHS', '/healthcheck/foo')
     application = wsgi_basic_auth.BasicAuth(wsgi_app)
     app = TestApp(application)
@@ -88,7 +88,7 @@ def test_exclude_paths_from_environ(monkeypatch):
     assert result == ['/foo/bar']
 
 def test_include_paths_from_environ(monkeypatch):
-    monkeypatch.setenv('WSGI_AUTH_INCLUDE_PATHS', '/foo/bar')
+    monkeypatch.setenv('WSGI_AUTH_PATHS', '/foo/bar')
     result = wsgi_basic_auth._include_paths_from_environ()
     assert result == ['/foo/bar']
 
@@ -98,7 +98,7 @@ def test_exclude_paths_from_environ_none(monkeypatch):
     assert result == []
 
 def test_include_paths_from_environ_none(monkeypatch):
-    monkeypatch.delenv('WSGI_AUTH_INCLUDE_PATHS', None)
+    monkeypatch.delenv('WSGI_AUTH_PATHS', None)
     result = wsgi_basic_auth._include_paths_from_environ()
     assert result == []
 
@@ -109,7 +109,7 @@ def test_exclude_paths_from_environ_empty(monkeypatch):
     assert result == []
 
 def test_include_paths_from_environ_empty(monkeypatch):
-    monkeypatch.delenv('WSGI_AUTH_INCLUDE_PATHS', '')
+    monkeypatch.delenv('WSGI_AUTH_PATHS', '')
     result = wsgi_basic_auth._include_paths_from_environ()
     assert result == []
 
@@ -119,6 +119,6 @@ def test_exclude_paths_from_environ_multiple(monkeypatch):
     assert result == ['/foo/bar', '/bar/foo']
 
 def test_include_paths_from_environ_multiple(monkeypatch):
-    monkeypatch.setenv('WSGI_AUTH_INCLUDE_PATHS', '/foo/bar;/bar/foo')
+    monkeypatch.setenv('WSGI_AUTH_PATHS', '/foo/bar;/bar/foo')
     result = wsgi_basic_auth._include_paths_from_environ()
     assert result == ['/foo/bar', '/bar/foo']

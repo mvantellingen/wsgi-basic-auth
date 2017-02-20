@@ -19,7 +19,7 @@ class BasicAuth(object):
                           supplied the values from the ``WSGI_AUTH_EXCLUDE_PATHS``
                           environment variable are used (splitted by ``;``)
     :param include_paths: list of path prefixes to include in auth. When not
-                          supplied the values from the ``WSGI_AUTH_INCLUDE_PATHS``
+                          supplied the values from the ``WSGI_AUTH_PATHS``
                           environment variable are used (splitted by ``;``)
     :param env_prefix: prefix for the environment variables above, default ``''``
 
@@ -104,7 +104,7 @@ def _exclude_paths_from_environ(env_prefix=''):
 
 def _include_paths_from_environ(env_prefix=''):
     """Environment value via `/login;/register`"""
-    paths = os.environ.get(env_prefix + 'WSGI_AUTH_INCLUDE_PATHS')
+    paths = os.environ.get(env_prefix + 'WSGI_AUTH_PATHS')
     if not paths:
         return []
     return paths.split(';')
