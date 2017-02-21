@@ -1,22 +1,41 @@
+---
 sudo: false
 language: python
-cache: pip
 
-python:
-    - '2.7'
-    - '3.3'
-    - '3.4'
-    - '3.5'
-    - '3.6'
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=py27
+    - python: 3.3
+      env: TOXENV=py33
+    - python: 3.4
+      env: TOXENV=py34
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
+    - python: pypy-5.3.1
+      env: TOXENV=pypy
 
-before_install:
-    - pip install codecov
+before_cache:
+  - rm -rf $HOME/.cache/pip/log
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+deps:
+  - codecov
 
 install:
-    - pip install -e .[test]
+  - pip install tox codecov
 
 script:
-    - py.test --cov=wsgi_basic_auth --cov-report=term-missing
+  - tox -e $TOXENV
 
 after_success:
-    - codecov
+  - tox -e coverage-report
+  - codecov
+
+notifications:
+  email: false
