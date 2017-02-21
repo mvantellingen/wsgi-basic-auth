@@ -4,7 +4,7 @@ from base64 import b64decode
 from webob import Request
 from webob.exc import HTTPUnauthorized
 
-__version__ = '1.0.4'
+__version__ = '1.1.0'
 
 
 class BasicAuth(object):

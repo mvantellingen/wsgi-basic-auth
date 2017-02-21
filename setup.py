@@ -19,7 +19,7 @@ tests_require = [
 
 setup(
     name='wsgi-basic-auth',
-    version='1.0.4',
+    version='1.1.0',
     description="Simple wsgi middleware to provide basic http auth",
     long_description=open('README.rst', 'r').read(),
     url='https://github.com/mvantellingen/wsgi-basic-auth',
