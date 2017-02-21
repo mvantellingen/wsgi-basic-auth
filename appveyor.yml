@@ -4,29 +4,19 @@ cache:
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python27"
-    - PYTHON: "C:\\Python33"
-    - PYTHON: "C:\\Python34"
-    - PYTHON: "C:\\Python35"
-
-init:
-  - "%PYTHON%/python -V"
-  - "%PYTHON%/python -c \"import struct;print( 8 * struct.calcsize(\'P\'))\""
+    - TOXENV: py27
+    - TOXENV: py34
+    - TOXENV: py35
+    - TOXENV: py36
 
 install:
-  - "%PYTHON%/Scripts/easy_install -U pip"
-  - "%PYTHON%/Scripts/pip install wheel"
-  - "%PYTHON%/Scripts/pip install -e .[test]"
-
+  - C:\Python36\python -m pip install tox codecov
 
 build: false  # Not a C# project, build stuff at the test step instead.
 
 test_script:
-  - "%PYTHON%/Scripts/py.test --cov=wsgi_basic_auth --cov-report=term-missing"
+  - C:\Python36\scripts\tox
 
 after_test:
-  - "%PYTHON%/python setup.py bdist_wheel"
-  - ps: "ls dist"
-
-artifacts:
-  - path: dist\*
+  - C:\Python36\scripts\tox -e coverage-report
+  - C:\Python36\scripts\codecov
