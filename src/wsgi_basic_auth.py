@@ -44,11 +44,18 @@ class BasicAuth(object):
         return self._app(environ, start_response)
 
     def is_authorized(self, request):
-        auth = request.authorization
+        """Check if the user is authenticated for the given request.
+
+        The include_paths and exclude_paths are first checked. If
+        authentication is required then the Authorization HTTP header is
+        checked against the credentials.
+
+        """
         if self._is_request_in_include_path(request):
             if self._is_request_in_exclude_path(request):
                 return True
             else:
+                auth = request.authorization
                 if auth and auth[0] == 'Basic':
                     credentials = b64decode(auth[1]).decode('UTF-8')
                     username, password = credentials.split(':', 1)
@@ -59,11 +66,18 @@ class BasicAuth(object):
             return True
 
     def _login(self, environ, start_response):
+        """Send a login response back to the client."""
         response = HTTPUnauthorized()
         response.www_authenticate = ('Basic', {'realm': self._realm})
         return response(environ, start_response)
 
     def _is_request_in_include_path(self, request):
+        """Check if the request path is in the `_include_paths` list.
+
+        If no specific include paths are given then we assume that
+        authentication is required for all paths.
+
+        """
         if self._include_paths:
             for path in self._include_paths:
                 if request.path.startswith(path):
@@ -73,6 +87,7 @@ class BasicAuth(object):
             return True
 
     def _is_request_in_exclude_path(self, request):
+        """Check if the request path is in the `_exclude_paths` list"""
         if self._exclude_paths:
             for path in self._exclude_paths:
                 if request.path.startswith(path):
@@ -101,6 +116,7 @@ def _exclude_paths_from_environ(env_prefix=''):
     if not paths:
         return []
     return paths.split(';')
+
 
 def _include_paths_from_environ(env_prefix=''):
     """Environment value via `/login;/register`"""
