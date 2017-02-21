@@ -10,7 +10,7 @@ environment:
     - TOXENV: py36
 
 install:
-  - C:\Python36\python -m pip install tox codecov
+  - C:\Python36\python -m pip install tox codecov coverage
 
 build: false  # Not a C# project, build stuff at the test step instead.
 
