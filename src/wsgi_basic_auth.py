@@ -31,9 +31,9 @@ class BasicAuth(object):
         self._env_prefix = env_prefix
         self._realm = realm
         self._users = users or _users_from_environ(env_prefix)
-        self._exclude_paths = (
+        self._exclude_paths = set(
             exclude_paths or _exclude_paths_from_environ(env_prefix))
-        self._include_paths = (
+        self._include_paths = set(
             include_paths or _include_paths_from_environ(env_prefix))
 
     def __call__(self, environ, start_response):
