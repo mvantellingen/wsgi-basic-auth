@@ -4,6 +4,8 @@ from base64 import b64decode
 from webob import Request
 from webob.exc import HTTPUnauthorized
 
+__version__ = '1.0.4'
+
 
 class BasicAuth(object):
     """WSGI Middleware to add Basic Authentication to an existing wsgi app.
