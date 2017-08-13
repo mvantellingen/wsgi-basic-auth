@@ -46,7 +46,7 @@ specify the environment variable WSGI_AUTH_EXCLUDE_PATHS=/api/healthchecks.
 Here multiple paths can be separated with the ; char.
 
 To include only specific paths specify the environment variable
-WSGI_AUTH_EXCLUDE_PATHS. Here multiple paths can be separated with the ; char.
+WSGI_AUTH_PATHS. Here multiple paths can be separated with the ; char.
 
 You can use both include and exclude paths together for example:
 WSGI_AUTH_PATHS=/foo
